@@ -1,0 +1,14 @@
+{
+  "name": "vue-pwa-preset",
+  "version": "0.0.0",
+  "description": "VueJS preset to PWA applications",
+  "repository": "https://github.com/FernandoFranco/vue-pwa-preset.git",
+  "author": "Fernando Franco <atr.franco@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  }
+}
