@@ -3,26 +3,36 @@
   "useConfigFiles": true,
   "cssPreprocessor": "dart-sass",
   "plugins": {
-    "@vue/cli-plugin-babel": {},
-    "@vue/cli-plugin-pwa": {},
-    "@vue/cli-plugin-router": {
-      "historyMode": true
+    "@vue/cli-plugin-babel": {
+      "version": "~4.5.0"
     },
-    "@vue/cli-plugin-vuex": {},
     "@vue/cli-plugin-eslint": {
+      "version": "~4.5.0",
       "config": "airbnb",
       "lintOn": [
         "save",
         "commit"
       ]
     },
+    "@vue/cli-plugin-pwa": {
+      "version": "~4.5.0"
+    },
+    "@vue/cli-plugin-router": {
+      "version": "~4.5.0",
+      "historyMode": true
+    },
+    "@vue/cli-plugin-vuex": {
+      "version": "~4.5.0"
+    },
     "vue-cli-plugin-i18n": {
+      "version": "~1.0.1",
       "locale": "en",
       "fallbackLocale": "en",
       "localeDir": "locales",
       "enableInSFC": false
     },
     "vue-cli-plugin-vuetify": {
+      "version": "~2.0.8",
       "preset": "configure",
       "replaceComponents": true,
       "useTheme": true,
