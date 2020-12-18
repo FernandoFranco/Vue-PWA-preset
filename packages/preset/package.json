@@ -1,0 +1,8 @@
+{
+  "name": "preset",
+  "version": "0.0.0",
+  "description": "VueJS preset to PWA applications",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true
+}

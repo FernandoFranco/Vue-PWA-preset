@@ -1,0 +1,37 @@
+{
+  "vueVersion": "2",
+  "useConfigFiles": true,
+  "cssPreprocessor": "dart-sass",
+  "plugins": {
+    "@vue/cli-plugin-babel": {},
+    "@vue/cli-plugin-pwa": {},
+    "@vue/cli-plugin-router": {
+      "historyMode": true
+    },
+    "@vue/cli-plugin-vuex": {},
+    "@vue/cli-plugin-eslint": {
+      "config": "airbnb",
+      "lintOn": [
+        "save",
+        "commit"
+      ]
+    },
+    "vue-cli-plugin-i18n": {
+      "locale": "en",
+      "fallbackLocale": "en",
+      "localeDir": "locales",
+      "enableInSFC": false
+    },
+    "vue-cli-plugin-vuetify": {
+      "preset": "configure",
+      "replaceComponents": true,
+      "useTheme": true,
+      "useCustomProperties": true,
+      "iconFont": "mdi",
+      "installFonts": true,
+      "useAlaCarte": true,
+      "usePolyfill": true,
+      "locale": "en"
+    }
+  }
+}
