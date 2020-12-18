@@ -1,6 +1,6 @@
 {
   "name": "vue-pwa-preset",
-  "version": "0.0.0",
+  "version": "0.2.0",
   "description": "VueJS preset to PWA applications",
   "main": "index.js",
   "repository": "https://github.com/FernandoFranco/vue-pwa-preset.git",
