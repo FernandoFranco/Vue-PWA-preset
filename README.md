@@ -20,3 +20,18 @@ Run the following command in your terminal:
 ```bash
 vue create my-project --preset FernandoFranco/vue-pwa-preset
 ```
+
+## Contributing
+
+This project use [commitlint](https://commitlint.js.org/) with types:
+
+* `build`: changes affecting the build system or external dependencies
+* `ci`: changes to CI configuration files and scripts
+* `chore`: other changes that do not modify src or test files
+* `docs`: changes to documentation only
+* `feat`: a new feature
+* `fix`: a bug fix
+* `perf`: a code change that improves performance
+* `refactory`: a code change that doesn't fix a bug or add a feature
+* `style`: changes that do not affect the meaning of the code
+* `test`: add missing tests or correct existing tests
