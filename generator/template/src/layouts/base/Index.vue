@@ -1,0 +1,17 @@
+<template>
+  <v-app>
+    <slot />
+
+    <v-main>
+      <v-fade-transition mode="out-in">
+        <router-view />
+      </v-fade-transition>
+    </v-main>
+  </v-app>
+</template>
+
+<script>
+export default {
+  name: 'LayoutBase',
+};
+</script>
