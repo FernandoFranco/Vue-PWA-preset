@@ -3,7 +3,6 @@ const path = require('path');
 
 module.exports = (api, ...paths) => {
   const templateFilePath = path.resolve(__dirname, 'template', ...paths);
-  const appFilePath = api.resolve(...paths);
 
   if (!fs.existsSync(templateFilePath)) {
     api.exitLog(`cannot find file ${templateFilePath}`, 'error');
@@ -17,6 +16,8 @@ module.exports = (api, ...paths) => {
   } catch (error) {
     api.exitLog(`cannot read from ${templateFilePath}`, 'error');
   }
+
+  const appFilePath = api.resolve(...paths);
 
   if (fs.existsSync(appFilePath)) {
     fs.unlinkSync(appFilePath);

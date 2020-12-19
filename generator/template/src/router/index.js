@@ -26,28 +26,20 @@ const router = new VueRouter({
   },
 
   routes: [
-    layoutRoute({
-      path: ROUTES.ROUTE_HOME.path,
-      layout: 'base',
-      children: [
-        viewRoute({
-          name: ROUTES.ROUTE_HOME.name,
-          view: 'home',
-        }),
-      ],
-    }),
+    layoutRoute(ROUTES.ROUTE_HOME.path, 'base', [
+      viewRoute({
+        name: ROUTES.ROUTE_HOME.name,
+        view: 'home',
+      }),
+    ]),
 
-    layoutRoute({
-      path: ROUTES.ROUTE_ABOUT.path,
-      layout: 'default',
-      children: [
-        viewRoute({
-          name: ROUTES.ROUTE_ABOUT.name,
-          view: 'about',
-          appBar: 'AppBar',
-        }),
-      ],
-    }),
+    layoutRoute(ROUTES.ROUTE_ABOUT.path, 'default', [
+      viewRoute({
+        name: ROUTES.ROUTE_ABOUT.name,
+        view: 'about',
+        appBar: 'AppBar',
+      }),
+    ]),
 
     redirectRoute(ROUTES.ROUTE_HOME),
   ],

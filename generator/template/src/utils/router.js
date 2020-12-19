@@ -1,6 +1,6 @@
 /* eslint-disable prefer-template */
 
-export function layoutRoute({ path, layout, children }) {
+export function layoutRoute(path, layout, children) {
   return {
     path,
     children,
@@ -14,8 +14,6 @@ export function layoutRoute({ path, layout, children }) {
 export function viewRoute({
   path = '', name, view, ...components
 }) {
-  console.log('COMPONENTS', components);
-
   return {
     path,
     name,
