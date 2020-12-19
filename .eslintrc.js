@@ -17,9 +17,10 @@ module.exports = {
   rules: {
     'import/no-unresolved': ['error', {
       ignore: [
+        '^@/.*',
         '^vue$',
         '^vue-router$',
-        '^@/.*',
+        '^vue-i18n$',
       ],
     }],
   },

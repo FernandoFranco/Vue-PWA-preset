@@ -2,6 +2,8 @@ const fs = require('fs');
 
 const envsGenerator = require('./envs');
 const overrideGenerator = require('./override');
+const localesGenerator = require('./locales');
+const mainGenerator = require('./main');
 
 module.exports = (api, options) => {
   api.render('./template');
@@ -23,6 +25,8 @@ module.exports = (api, options) => {
       fs.unlinkSync(api.resolve('src', 'components', 'HelloWorld.vue'));
       fs.unlinkSync(api.resolve('src', 'views', 'About.vue'));
       fs.unlinkSync(api.resolve('src', 'views', 'Home.vue'));
+      fs.unlinkSync(api.resolve('src', 'locales', 'en.json'));
+      fs.unlinkSync(api.resolve('src', 'i18n.js'));
     } catch (error) {
       console.warn('unlink files error:', error.message); // eslint-disable-line
       return;
@@ -30,5 +34,7 @@ module.exports = (api, options) => {
 
     envsGenerator(api, options);
     overrideGenerator(api, 'src', 'App.vue');
+    localesGenerator(api, options);
+    mainGenerator(api);
   });
 };
