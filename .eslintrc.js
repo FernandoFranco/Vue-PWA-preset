@@ -15,5 +15,12 @@ module.exports = {
     'vue',
   ],
   rules: {
+    'import/no-unresolved': ['error', {
+      ignore: [
+        '^vue$',
+        '^vue-router$',
+        '^@/.*',
+      ],
+    }],
   },
 };
