@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 module.exports = (api, ...paths) => {
-  const templateFilePath = path.resolve(__dirname, 'template', ...paths);
+  const templateFilePath = path.resolve(__dirname, '..', 'template', ...paths);
 
   if (!fs.existsSync(templateFilePath)) {
     api.exitLog(`cannot find file ${templateFilePath}`, 'error');
