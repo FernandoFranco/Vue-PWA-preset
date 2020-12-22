@@ -1,67 +1,52 @@
-const fs = require('fs');
+const readWriteFile = require('./utils/readWriteFile');
 
 module.exports = (api) => {
-  const mainPath = api.resolve('src', 'main.js');
+  const filePath = api.resolve('src', 'main.js');
 
-  if (!fs.existsSync(mainPath)) {
-    api.exitLog(`cannot read from ${mainPath}`, 'error');
-    return;
-  }
+  readWriteFile(api, filePath, (content) => {
+    let inNewVue = false;
 
-  let content = null;
+    return content.split('\n')
+      .reduce((lines, line) => {
+        if (/registerServiceWorker/.test(line)) {
+          return lines.concat(`\n${line}\n`);
+        }
 
-  try {
-    content = fs.readFileSync(mainPath, { encoding: 'utf8' });
-  } catch (error) {
-    api.exitLog(`cannot read from ${mainPath}`, 'error');
-  }
+        if (/import i18n/.test(line)) {
+          return lines.concat('\nimport i18n, { setupLanguage } from \'./plugins/i18n\';');
+        }
 
-  let inNewVue = false;
-  content = content.split('\n')
-    .reduce((lines, line) => {
-      if (/registerServiceWorker/.test(line)) {
-        return lines.concat(`\n${line}\n`);
-      }
+        if (/(roboto)|(@mdi)/.test(line)) {
+          return lines;
+        }
 
-      if (/import i18n/.test(line)) {
-        return lines.concat('\nimport i18n, { setupLanguage } from \'./plugins/i18n\';');
-      }
+        if (/new Vue/.test(line)) {
+          inNewVue = true;
 
-      if (/(roboto)|(@mdi)/.test(line)) {
-        return lines;
-      }
-
-      if (/new Vue/.test(line)) {
-        inNewVue = true;
-
-        return lines.concat([
-          'Promise.resolve()',
-          '  .then(async () => {',
-          '    await setupLanguage(Array.from(navigator.languages));',
-          '  })',
-          '  .then(() => {',
-          `    ${line}`,
-        ]);
-      }
-
-      if (inNewVue) {
-        if (/\$mount/.test(line)) {
-          inNewVue = false;
           return lines.concat([
+            'Promise.resolve()',
+            '  .then(async () => {',
+            '    await setupLanguage(Array.from(navigator.languages));',
+            '  })',
+            '  .then(() => {',
             `    ${line}`,
-            '  });',
           ]);
         }
 
-        return lines.concat(`    ${line}`);
-      }
+        if (inNewVue) {
+          if (/\$mount/.test(line)) {
+            inNewVue = false;
+            return lines.concat([
+              `    ${line}`,
+              '  });',
+            ]);
+          }
 
-      return lines.concat(line);
-    }, []);
+          return lines.concat(`    ${line}`);
+        }
 
-  try {
-    fs.writeFileSync(mainPath, content.join('\n'), { encoding: 'utf8' });
-  } catch (error) {
-    api.exitLog(`cannot write to ${mainPath}`, 'error');
-  }
+        return lines.concat(line);
+      }, [])
+      .join('\n');
+  });
 };
