@@ -1,7 +1,7 @@
 {
-  "name": "vue-pwa-preset",
+  "name": "vuetify-pwa-preset",
   "version": "0.2.0",
-  "description": "VueJS preset to PWA applications",
+  "description": "VueJS preset to PWA applications with Vuetify",
   "main": "index.js",
   "repository": "https://github.com/FernandoFranco/vue-pwa-preset.git",
   "author": "Fernando Franco <atr.franco@gmail.com>",
