@@ -1,12 +1,14 @@
 const fs = require('fs');
 
 const envsGenerator = require('./envs');
-const overrideGenerator = require('./override');
+const overrideGenerator = require('./utils/override');
 const localesGenerator = require('./locales');
 const mainGenerator = require('./main');
+const vueConfigGenerator = require('./vueConfig');
+const vuetify = require('./vuetify');
 
-module.exports = (api, options) => {
-  api.render('./template');
+module.exports = (api, options, { projectName }) => {
+  api.render('./template', { projectName });
 
   api.extendPackage({
     devDependencies: {
@@ -15,6 +17,34 @@ module.exports = (api, options) => {
     },
     gitHooks: {
       'commit-msg': 'commitlint -e -V',
+    },
+    vue: {
+      pluginOptions: {
+        i18n: {
+          localeDir: 'locales',
+          enableInSFC: false,
+          locale: '#{{process.env.VUE_APP_I18N_LOCALE}}',
+          fallbackLocale: '#{{process.env.VUE_APP_I18N_FALLBACK_LOCALE}}',
+        },
+      },
+
+      pwa: {
+        name: '#{{process.env.VUE_APP_PROJECT_NAME}}',
+        themeColor: '#{{process.env.VUE_APP_THEME_COLOR_PRIMARY}}',
+        msTileColor: '#{{process.env.VUE_APP_THEME_COLOR_SECONDARY}}',
+        appleMobileWebAppCapable: 'yes',
+        appleMobileWebAppStatusBarStyle: 'black-translucent',
+
+        manifestOptions: {
+          start_url: './?standalone=true',
+          background_color: '#{{process.env.VUE_APP_THEME_COLOR_PRIMARY}}',
+        },
+
+        workboxPluginMode: 'InjectManifest',
+        workboxOptions: {
+          swSrc: 'service-worker.js',
+        },
+      },
     },
   });
 
@@ -36,5 +66,7 @@ module.exports = (api, options) => {
     overrideGenerator(api, 'src', 'App.vue');
     localesGenerator(api, options);
     mainGenerator(api);
+    vueConfigGenerator(api);
+    vuetify(api);
   });
 };
