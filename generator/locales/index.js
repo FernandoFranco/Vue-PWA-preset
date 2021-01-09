@@ -1,10 +1,16 @@
 const fs = require('fs');
 
+const en = require('./en');
+const pt = require('./pt');
+
+const locales = { en, pt };
+
 function createI18nContent(locale) {
   return `import $vuetify from 'vuetify/es5/locale/${locale}';
 
 export default {
   $vuetify,
+  ${locales[locale] || en}
 };
 `;
 }

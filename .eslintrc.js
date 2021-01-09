@@ -24,6 +24,7 @@ module.exports = {
         '^vuetify',
         '^roboto',
         '^@mdi',
+        'register-service-worker',
       ],
     }],
   },
