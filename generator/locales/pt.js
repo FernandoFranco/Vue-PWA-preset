@@ -1,5 +1,4 @@
-module.exports = `
-  pwa: {
+module.exports = `pwa: {
     install: {
       title: \`Instalar \${process.env.VUE_APP_PROJECT_NAME}\`,
       message: 'Instale nosso aplicativo em sua tela inicial para um acesso mais rápido e fácil.',
@@ -14,5 +13,4 @@ module.exports = `
 
     newAvailable: 'Nova versão disponível',
     update: 'Atualizar',
-  },
-`;
+  },`;

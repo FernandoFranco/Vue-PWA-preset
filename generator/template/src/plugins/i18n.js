@@ -15,6 +15,7 @@ const i18n = new VueI18n({
   locale,
   fallbackLocale,
   messages: {
+    [locale]: require(`../locales/${locale}`).default, // eslint-disable-line
     [fallbackLocale]: require(`../locales/${fallbackLocale}`).default, // eslint-disable-line
   },
   modifiers: {
