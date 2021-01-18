@@ -2,7 +2,13 @@
   <v-dialog :value="showing" max-width="350">
     <v-card>
       <v-card-title class="flex-column text-center">
-        <v-img :src="$_icon" class="elecation-2" width="64" height="64" contain />
+        <v-img contain
+          :src="$_icon"
+          :class="{ isIos }"
+          class="elecation-2"
+          width="64"
+          height="64"
+        />
         <div>{{ $t('pwa.install.title') }}</div>
       </v-card-title>
 
@@ -37,15 +43,19 @@ function shouldDisplayPrompt() {
   if (!lastPrompt) return true;
 
   const diffTime = Math.abs(lastPrompt - Date.now());
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-  return diffDays > Number(process.env.VUE_APP_PWA_INSTALL_PROMPT_EVERY);
+  const diffDays = Math.trunc(diffTime / (1000 * 60 * 60 * 24));
+  return diffDays >= Number(process.env.VUE_APP_PWA_INSTALL_PROMPT_EVERY);
 }
 
 export default {
   name: 'pwa-install-dialog',
 
   data() {
+    const userAgent = window.navigator.userAgent.toLowerCase();
+    const isIos = /iphone|ipad|ipod/.test(userAgent);
+
     return {
+      isIos,
       showing: false,
     };
   },
@@ -101,12 +111,15 @@ export default {
       this.$_show();
     });
 
-    const userAgent = window.navigator.userAgent.toLowerCase();
-    this.isIos = /iphone|ipad|ipod/.test(userAgent);
-
     if (this.isIos && !isStandalone(this.$route)) {
       this.$_show();
     }
   },
 };
 </script>
+
+<style lang="scss">
+.isIos {
+  border-radius: 11.23px;
+}
+</style>
